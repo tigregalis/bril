@@ -64,3 +64,8 @@ pub extern "C" fn mem_free(ptr: *mut u8) {
         alloc::dealloc(base_ptr, layout);
     }
 }
+
+#[no_mangle]
+pub extern "C" fn recompile() {
+    println!("Recompiling...");
+}

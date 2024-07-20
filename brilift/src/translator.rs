@@ -26,6 +26,7 @@ enum RTFunc {
     PrintEnd,
     Alloc,
     Free,
+    Recompile,
 }
 
 impl RTFunc {
@@ -73,6 +74,11 @@ impl RTFunc {
                 returns: vec![],
                 call_conv,
             },
+            Self::Recompile => ir::Signature {
+                params: vec![],
+                returns: vec![],
+                call_conv,
+            },
         }
     }
 
@@ -85,6 +91,7 @@ impl RTFunc {
             Self::PrintEnd => "_bril_print_end",
             Self::Alloc => "_bril_alloc",
             Self::Free => "_bril_free",
+            Self::Recompile => "_bril_recompile",
         }
     }
 
@@ -97,6 +104,7 @@ impl RTFunc {
             RTFunc::PrintEnd => rt::print_end as *const u8,
             RTFunc::Alloc => rt::mem_alloc as *const u8,
             RTFunc::Free => rt::mem_free as *const u8,
+            RTFunc::Recompile => rt::recompile as *const u8,
         }
     }
 }
@@ -460,6 +468,9 @@ impl CompileEnv<'_> {
                 }
                 bril::EffectOps::Speculate | bril::EffectOps::Commit | bril::EffectOps::Guard => {
                     unimplemented!()
+                }
+                bril::EffectOps::Recompile => {
+                    builder.ins().call(self.rt_refs[RTFunc::Recompile], &[]);
                 }
             },
             bril::Instruction::Value {
