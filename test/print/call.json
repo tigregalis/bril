@@ -15,6 +15,7 @@
       "name": "main",
       "args": [],
       "instrs": [
+        { "op": "recompile" },
         { "op": "const", "type": "int", "dest": "a", "value": 9 },
         { "op": "call", "type": "int", "dest": "b",
           "funcs": ["add5"], "args": ["a"] },

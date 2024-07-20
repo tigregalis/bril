@@ -301,6 +301,7 @@ impl TryFrom<AbstractInstruction> for Instruction {
                     "commit" => EffectOps::Commit,
                     #[cfg(feature = "speculate")]
                     "guard" => EffectOps::Guard,
+                    "recompile" => EffectOps::Recompile,
                     e => {
                         return Err(ConversionError::InvalidEffectOps(e.to_string()))
                             .map_err(|e| e.add_pos(pos))

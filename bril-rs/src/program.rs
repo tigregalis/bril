@@ -364,6 +364,7 @@ pub enum EffectOps {
     /// <https://capra.cs.cornell.edu/bril/lang/spec.html#operations>
     #[cfg(feature = "speculate")]
     Guard,
+    Recompile,
 }
 
 impl Display for EffectOps {
@@ -385,6 +386,7 @@ impl Display for EffectOps {
             Self::Commit => write!(f, "commit"),
             #[cfg(feature = "speculate")]
             Self::Guard => write!(f, "guard"),
+            Self::Recompile => write!(f, "recompile"),
         }
     }
 }
