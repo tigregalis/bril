@@ -504,6 +504,18 @@ fn type_check_instruction<'a>(
     } => {
       unimplemented!()
     }
+    Instruction::Effect {
+      op: EffectOps::Recompile,
+      args,
+      funcs,
+      labels,
+      pos: _,
+    } => {
+      check_num_args(0, args)?;
+      check_num_funcs(0, funcs)?;
+      check_num_labels(0, labels)?;
+      Ok(())
+    }
   }
 }
 

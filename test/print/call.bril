@@ -4,6 +4,7 @@
   ret sum;
 }
 @main {
+  recompile;
   a: int = const 9;
   b: int = call @add5 a;
   print b;

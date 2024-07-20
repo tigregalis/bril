@@ -531,7 +531,7 @@ fn execute_effect_op<T: std::io::Write>(
   result: &mut Option<Value>,
 ) -> Result<(), InterpError> {
   use bril_rs::EffectOps::{
-    Branch, Call, Commit, Free, Guard, Jump, Nop, Print, Return, Speculate, Store,
+    Branch, Call, Commit, Free, Guard, Jump, Nop, Print, Recompile, Return, Speculate, Store,
   };
   match op {
     Jump => {
@@ -585,6 +585,7 @@ fn execute_effect_op<T: std::io::Write>(
       state.heap.free(arg0)?;
     }
     Speculate | Commit | Guard => unimplemented!(),
+    Recompile => {}
   }
   Ok(())
 }
